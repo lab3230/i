@@ -14,8 +14,8 @@ function App() {
       <div className='buttons'>
         {/* <a href='./repositories/UI-GridLayout'>グリッドレイアウトコントロール</a> */}
         <a onClickCapture={func.onclick.gridLayout}>グリッドレイアウトコントロール</a>
-        {/* <a href='./repositories/UI-HandWriting' onClickCapture={e => { e.stopPropagation(); func.onclick.gridLayout }}>手書きコントロール</a> */}
-        <a onClickCapture={func.onclick.gridLayout}>手書きコントロール</a>
+        <a href='./repositories/UI-HandWriting' onClickCapture={e => { e.stopPropagation(); func.onclick.gridLayout }}>手書きコントロール</a>
+        {/* <a onClickCapture={func.onclick.gridLayout}>手書きコントロール</a> */}
       </div>
     </div >
   )
