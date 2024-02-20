@@ -14,8 +14,8 @@ function App() {
         {/* <a onClickCapture={func.onclick.gridLayout}>グリッドレイアウトコントロール</a> */}
         <a href='./repositories/UI-HandWriting'>手書きコントロール</a>
         {/* <a onClickCapture={func.onclick.gridLayout}>手書きコントロール</a> */}
-        {/* <a href='./repositories/'>Flutteアプリ内にReactアプリを完全に埋め込む（ガワアプリでありません）</a> */}
-        <a onClickCapture={func.alert}>Flutteアプリ内にReactアプリを完全に埋め込む<br />（ガワアプリでは無いので外部サーバーは不要）</a>
+        {/* <a href='./repositories/'>FlutteアプリにReactアプリを全て埋め込みインストーラーだけで配布する</a> */}
+        <a onClickCapture={func.alert}>FlutteアプリにReactアプリを全部埋め込みインストーラーだけで配布する<br />（Reactアプリをホストする外部サーバーは不要です！）</a>
       </div>
     </div >
   )
