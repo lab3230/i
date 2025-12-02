@@ -94,20 +94,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     // Curriculum Data
     const curriculumData = [
-        {
+         {
             step: '01',
+            title: 'ビジュアルエディター',
+            description: 'オリジナルのビジュアルエディターのサンプル実装です。',
+            url: 'site/UI-GridLayout/index.html'
+        },
+        {
+            step: '02',
             title: 'グリッドレイアウトコントロール',
             description: 'オリジナルのグリッドレイアウトコントロールのサンプル実装です。',
             url: 'site/UI-GridLayout/index.html'
         },
         {
-            step: '02',
+            step: '03',
             title: '手書き入力コントロール',
             description: '手書き入力インターフェースのサンプル実装です。',
             url: 'site/UI-HandWriting/index.html'
         },
         {
-            step: '03',
+            step: '04',
             title: 'Coming Soon...',
             description: '現在準備中のコンテンツです。公開までしばらくお待ちください。',
             url: 'under_construction.html'
