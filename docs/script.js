@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
             step: '01',
             title: 'ビジュアルエディター',
             description: 'オリジナルのビジュアルエディターのサンプル実装です。',
-            url: 'site/UI-GridLayout/index.html'
+            url: 'site/UI-LayoutEditor/index.html'
         },
         {
             step: '02',
