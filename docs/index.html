@@ -59,7 +59,6 @@
         -webkit-font-smoothing: antialiased;
       }
 
-      /* パターンレイヤー */
       body::before {
         content: "";
         position: fixed;
@@ -77,7 +76,6 @@
         padding: 0 0 4rem;
       }
 
-      /* Header */
       .pf-header {
         border-bottom: 1px solid var(--line);
         padding: 3rem 0 2rem;
@@ -140,7 +138,6 @@
         color: var(--quiet);
       }
 
-      /* Section label */
       .pf-section-label {
         font-family: "JetBrains Mono", monospace;
         font-size: 11px;
@@ -159,7 +156,7 @@
         background: var(--line);
       }
 
-      /* Cards */
+      /* Clickable Card */
       .pf-cards {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -167,6 +164,8 @@
         margin-bottom: 2.5rem;
       }
       .pf-card {
+        display: block; /* リンクとして機能させるため */
+        text-decoration: none; /* 下線を消去 */
         background: var(--surface);
         backdrop-filter: blur(8px);
         border: 1px solid var(--line);
@@ -175,10 +174,12 @@
         transition: all 0.2s ease;
         position: relative;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
       }
       .pf-card:hover {
         border-color: var(--accent);
         transform: translateY(-2px);
+        background: rgba(30, 28, 25, 0.85); /* ホバー時の視認性向上 */
       }
       .pf-card::before {
         content: "";
@@ -241,25 +242,20 @@
         color: #a7eee6;
         border: 1px solid rgba(95, 224, 208, 0.2);
       }
-      .open-link {
+      /* 以前のbuttonからspanに変更し、ホバー等のスタイルを調整 */
+      .open-label {
         display: inline-flex;
         align-items: center;
         gap: 5px;
         font-family: "JetBrains Mono", monospace;
         font-size: 11px;
         color: var(--accent);
-        background: none;
-        border: none;
-        padding: 0;
-        cursor: pointer;
-        text-decoration: none;
         flex-shrink: 0;
       }
-      .open-link:hover {
+      .pf-card:hover .open-label {
         text-decoration: underline;
       }
 
-      /* iFrame / Fallback */
       .pf-preview-wrap {
         width: 100%;
         height: 250px;
@@ -271,11 +267,11 @@
       .pf-preview {
         width: 400%;
         height: 1000px;
+        transform: scale(calc(1 / 4));
         border: none;
         display: block;
-        transform: scale(calc(1 / 4));
         transform-origin: top left;
-        pointer-events: none;
+        pointer-events: none; /* iframeがクリックを奪わないようにする */
         opacity: 0.85;
       }
       .pf-fallback {
@@ -294,20 +290,7 @@
         font-size: 11px;
         color: var(--quiet);
       }
-      .pf-fallback-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-        font-family: "JetBrains Mono", monospace;
-        font-size: 11px;
-        color: var(--accent);
-        background: none;
-        border: none;
-        padding: 0;
-        cursor: pointer;
-      }
 
-      /* Footer */
       .pf-footer {
         font-family: "JetBrains Mono", monospace;
         font-size: 11px;
@@ -369,7 +352,13 @@
       <div class="pf-section-label">implementations</div>
 
       <div class="pf-cards">
-        <div class="pf-card">
+        <!-- Card 01 -->
+        <a
+          href="https://lab3230.github.io/i/site/UI-LayoutEditor/index.html"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="pf-card"
+        >
           <div class="pf-card-header">
             <div class="pf-card-num">01</div>
             <div class="pf-card-title">UI Visual Editor</div>
@@ -378,23 +367,10 @@
                 <span class="pf-card-tag">React</span>
                 <span class="pf-card-tag">DnD</span>
               </div>
-              <button
-                class="open-link"
-                onclick="
-                  window.open(
-                    'https://lab3230.github.io/i/site/UI-LayoutEditor/index.html',
-                    '_blank',
-                  )
-                "
-                aria-label="UI Layout Editor を開く"
-              >
-                <i
-                  class="ti ti-external-link"
-                  style="font-size: 12px"
-                  aria-hidden="true"
-                ></i>
+              <span class="open-label">
+                <i class="ti ti-external-link" style="font-size: 12px"></i>
                 Open
-              </button>
+              </span>
             </div>
           </div>
           <div class="pf-preview-wrap">
@@ -409,26 +385,16 @@
           </div>
           <div class="pf-fallback" id="fb1">
             <span class="pf-fallback-txt">preview blocked by browser</span>
-            <button
-              class="pf-fallback-btn"
-              onclick="
-                window.open(
-                  'https://lab3230.github.io/i/site/UI-LayoutEditor/index.html',
-                  '_blank',
-                )
-              "
-            >
-              <i
-                class="ti ti-external-link"
-                style="font-size: 12px"
-                aria-hidden="true"
-              ></i>
-              Open
-            </button>
           </div>
-        </div>
+        </a>
 
-        <div class="pf-card">
+        <!-- Card 02 -->
+        <a
+          href="https://lab3230.github.io/i/site/UI-GridLayout/index.html"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="pf-card"
+        >
           <div class="pf-card-header">
             <div class="pf-card-num">02</div>
             <div class="pf-card-title">UI Grid Layout</div>
@@ -437,23 +403,10 @@
                 <span class="pf-card-tag">CSS Grid</span>
                 <span class="pf-card-tag">TS</span>
               </div>
-              <button
-                class="open-link"
-                onclick="
-                  window.open(
-                    'https://lab3230.github.io/i/site/UI-GridLayout/index.html',
-                    '_blank',
-                  )
-                "
-                aria-label="UI Grid Layout を開く"
-              >
-                <i
-                  class="ti ti-external-link"
-                  style="font-size: 12px"
-                  aria-hidden="true"
-                ></i>
+              <span class="open-label">
+                <i class="ti ti-external-link" style="font-size: 12px"></i>
                 Open
-              </button>
+              </span>
             </div>
           </div>
           <div class="pf-preview-wrap">
@@ -468,26 +421,16 @@
           </div>
           <div class="pf-fallback" id="fb2">
             <span class="pf-fallback-txt">preview blocked by browser</span>
-            <button
-              class="pf-fallback-btn"
-              onclick="
-                window.open(
-                  'https://lab3230.github.io/i/site/UI-GridLayout/index.html',
-                  '_blank',
-                )
-              "
-            >
-              <i
-                class="ti ti-external-link"
-                style="font-size: 12px"
-                aria-hidden="true"
-              ></i>
-              Open
-            </button>
           </div>
-        </div>
+        </a>
 
-        <div class="pf-card">
+        <!-- Card 03 -->
+        <a
+          href="https://lab3230.github.io/i/site/UI-HandWriting/index.html"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="pf-card"
+        >
           <div class="pf-card-header">
             <div class="pf-card-num">03</div>
             <div class="pf-card-title">UI Hand Writing</div>
@@ -496,23 +439,10 @@
                 <span class="pf-card-tag">Canvas</span>
                 <span class="pf-card-tag">Pointer</span>
               </div>
-              <button
-                class="open-link"
-                onclick="
-                  window.open(
-                    'https://lab3230.github.io/i/site/UI-HandWriting/index.html',
-                    '_blank',
-                  )
-                "
-                aria-label="UI Hand Writing を開く"
-              >
-                <i
-                  class="ti ti-external-link"
-                  style="font-size: 12px"
-                  aria-hidden="true"
-                ></i>
+              <span class="open-label">
+                <i class="ti ti-external-link" style="font-size: 12px"></i>
                 Open
-              </button>
+              </span>
             </div>
           </div>
           <div class="pf-preview-wrap">
@@ -527,24 +457,8 @@
           </div>
           <div class="pf-fallback" id="fb3">
             <span class="pf-fallback-txt">preview blocked by browser</span>
-            <button
-              class="pf-fallback-btn"
-              onclick="
-                window.open(
-                  'https://lab3230.github.io/i/site/UI-HandWriting/index.html',
-                  '_blank',
-                )
-              "
-            >
-              <i
-                class="ti ti-external-link"
-                style="font-size: 12px"
-                aria-hidden="true"
-              ></i>
-              Open
-            </button>
           </div>
-        </div>
+        </a>
       </div>
 
       <footer class="pf-footer">
