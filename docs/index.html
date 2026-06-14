@@ -4,874 +4,527 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfolio by Takahiro Tanaka</title>
-    <meta
-      name="description"
-      content="サンプル実装を掲載した、Takahiro Tanakaのポートフォリオサイト。"
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Roboto+Mono:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <script
-      src="https://kit.fontawesome.com/a076d05399.js"
-      crossorigin="anonymous"
-    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"
+    />
     <style>
-      :root {
-        --bg-dark: #0a0a0f;
-        --bg-card: rgba(255, 255, 255, 0.03);
-        --bg-card-hover: rgba(255, 255, 255, 0.07);
-        --primary: #6366f1;
-        --primary-glow: rgba(99, 102, 241, 0.5);
-        --secondary: #a855f7;
-        --accent: #ec4899;
-        --text-main: #ffffff;
-        --text-muted: #94a3b8;
-        --border: rgba(255, 255, 255, 0.1);
-        --font-main: "Inter", sans-serif;
-        --font-mono: "Roboto Mono", monospace;
-      }
-
-      * {
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
         margin: 0;
         padding: 0;
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
       }
 
       body {
-        font-family: var(--font-main);
-        background-color: var(--bg-dark);
-        color: var(--text-main);
-        line-height: 1.6;
-        overflow-x: hidden;
+        font-family: "Inter", sans-serif;
+        background: #ffffff;
+        color: #1a1a1a;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        padding: 0 24px;
       }
 
-      /* Background Effects */
-      .background-glow {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background:
-          radial-gradient(
-            circle at 15% 50%,
-            rgba(99, 102, 241, 0.15) 0%,
-            transparent 25%
-          ),
-          radial-gradient(
-            circle at 85% 30%,
-            rgba(168, 85, 247, 0.15) 0%,
-            transparent 25%
-          );
-        z-index: -1;
-        pointer-events: none;
-      }
-
-      /* Typography & Utilities */
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 2rem;
-      }
-
-      .text-center {
-        text-align: center;
-      }
-
-      .gradient-text {
-        background: linear-gradient(
-          135deg,
-          var(--primary),
-          var(--secondary),
-          var(--accent)
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-
-      .btn {
-        display: inline-block;
-        padding: 0.8rem 2rem;
-        border-radius: 50px;
-        font-weight: 600;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        cursor: pointer;
-        border: none;
-      }
-
-      .btn-primary {
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        color: white;
-        box-shadow: 0 4px 15px var(--primary-glow);
-      }
-
-      .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px var(--primary-glow);
-      }
-
-      .btn-outline {
-        background: transparent;
-        border: 1px solid var(--border);
-        color: var(--text-main);
-      }
-
-      .btn-outline:hover {
-        background: rgba(255, 255, 255, 0.05);
-        border-color: var(--text-main);
-      }
-
-      .btn-lg {
-        padding: 1rem 2.5rem;
-        font-size: 1.1rem;
+      .pf-root {
+        width: 100%;
+        max-width: 680px;
+        padding: 0 0 4rem;
       }
 
       /* Header */
-      .header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 1000;
-        background: rgba(10, 10, 15, 0.8);
-        -webkit-backdrop-filter: blur(10px);
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid var(--border);
-        padding: 1rem 0;
+      .pf-header {
+        border-bottom: 0.5px solid rgba(0, 0, 0, 0.15);
+        padding: 3rem 0 2rem;
+        margin-bottom: 2.5rem;
+      }
+      .pf-prompt-line {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 1.25rem;
+      }
+      .pf-prompt-sym {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 13px;
+        color: #1d9e75;
+        user-select: none;
+      }
+      .pf-prompt-text {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 13px;
+        color: #666;
+      }
+      .pf-cursor {
+        display: inline-block;
+        width: 8px;
+        height: 14px;
+        background: #1d9e75;
+        vertical-align: middle;
+        margin-left: 2px;
+        animation: blink 1.1s step-end infinite;
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+      .pf-name {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 32px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        color: #1a1a1a;
+        line-height: 1.2;
+        margin-bottom: 6px;
+      }
+      .pf-name .accent {
+        color: #1d9e75;
+      }
+      .pf-role {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 14px;
+        color: #666;
+        letter-spacing: 0.04em;
+      }
+      .pf-role .dim {
+        color: #aaa;
       }
 
-      .header-container {
+      /* Section label */
+      .pf-section-label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        color: #aaa;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .pf-section-label::after {
+        content: "";
+        flex: 1;
+        height: 0.5px;
+        background: rgba(0, 0, 0, 0.15);
+      }
+
+      /* Cards */
+      .pf-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 12px;
+        margin-bottom: 2.5rem;
+      }
+      .pf-card {
+        background: #ffffff;
+        border: 0.5px solid rgba(0, 0, 0, 0.15);
+        border-radius: 12px;
+        overflow: hidden;
+        transition: border-color 0.15s;
+        position: relative;
+      }
+      .pf-card:hover {
+        border-color: rgba(0, 0, 0, 0.3);
+      }
+      .pf-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 3px;
+        height: 100%;
+        background: #1d9e75;
+        opacity: 0;
+        transition: opacity 0.15s;
+        z-index: 1;
+      }
+      .pf-card:hover::before {
+        opacity: 1;
+      }
+      .pf-card-header {
+        padding: 1rem 1rem 0.75rem;
+      }
+      .pf-card-num {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        color: #1d9e75;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .pf-card-num::before {
+        content: "";
+        width: 16px;
+        height: 0.5px;
+        background: #1d9e75;
+      }
+      .pf-card-title {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 14px;
+        font-weight: 500;
+        color: #1a1a1a;
+        margin-bottom: 10px;
+      }
+      .pf-card-tag-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6px;
+      }
+      .pf-card-tags {
+        display: flex;
+        gap: 5px;
+        flex-wrap: wrap;
+      }
+      .pf-card-tag {
+        display: inline-block;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10px;
+        padding: 2px 7px;
+        border-radius: 3px;
+        background: #f5f5f5;
+        color: #888;
+        border: 0.5px solid rgba(0, 0, 0, 0.15);
+      }
+      .open-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        color: #1d9e75;
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        text-decoration: none;
+        flex-shrink: 0;
+      }
+      .open-link:hover {
+        text-decoration: underline;
+      }
+
+      /* iFrame / Fallback */
+      .pf-preview-wrap {
+        width: 100%;
+        height: 250px;
+        overflow: hidden;
+        border-top: 0.5px solid rgba(0, 0, 0, 0.15);
+        background: #f9f9f9;
+        position: relative;
+      }
+      .pf-preview {
+        width: 200%;
+        height: 500px;
+        border: none;
+        display: block;
+        transform: scale(0.5);
+        transform-origin: top left;
+        pointer-events: none;
+      }
+      .pf-fallback {
+        width: 100%;
+        height: 250px;
+        border-top: 0.5px solid rgba(0, 0, 0, 0.15);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 10px;
+        background: #f9f9f9;
+      }
+      .pf-fallback-txt {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        color: #aaa;
+      }
+      .pf-fallback-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        color: #1d9e75;
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+      }
+
+      /* Footer */
+      .pf-footer {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        color: #aaa;
+        padding-top: 1.5rem;
+        border-top: 0.5px solid rgba(0, 0, 0, 0.15);
         display: flex;
         justify-content: space-between;
         align-items: center;
       }
-
-      .logo {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: var(--text-main);
-        text-decoration: none;
-        font-family: var(--font-mono);
-      }
-
-      .logo .dot {
-        color: var(--primary);
-      }
-
-      .nav ul {
-        display: flex;
-        gap: 2rem;
-        list-style: none;
-        align-items: center;
-      }
-
-      .nav a:not(.btn) {
-        color: var(--text-muted);
-        text-decoration: none;
-        transition: color 0.3s;
-      }
-
-      .nav a:not(.btn):hover {
-        color: var(--text-main);
-      }
-
-      .mobile-menu-btn {
-        display: none;
-        background: none;
-        border: none;
-        cursor: pointer;
-        flex-direction: column;
-        gap: 6px;
-      }
-
-      .mobile-menu-btn span {
-        display: block;
-        width: 25px;
-        height: 2px;
-        background-color: var(--text-main);
-        transition: 0.3s;
-      }
-
-      /* Hero Section */
-      .hero {
-        padding-top: 180px;
-        padding-bottom: 100px;
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        position: relative;
-        background: url("hero_background_1764634148809.png") center/cover
-          no-repeat;
-      }
-
-      .hero::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(10, 10, 15, 0.85);
-        /* Dark overlay to ensure text readability */
-        z-index: 0;
-      }
-
-      .hero-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 4rem;
-        align-items: center;
-        position: relative;
-        z-index: 1;
-      }
-
-      .hero-title {
-        font-size: 3.5rem;
-        line-height: 1.2;
-        margin-bottom: 1.5rem;
-        font-weight: 800;
-      }
-
-      .hero-description {
-        font-size: 1.1rem;
-        color: var(--text-muted);
-        margin-bottom: 2.5rem;
-        max-width: 500px;
-      }
-
-      .hero-buttons {
-        display: flex;
-        gap: 1rem;
-        margin-bottom: 3rem;
-      }
-
-      .hero-stats {
-        display: flex;
-        gap: 3rem;
-        border-top: 1px solid var(--border);
-        padding-top: 2rem;
-      }
-
-      .stat-item {
-        display: flex;
-        flex-direction: column;
-      }
-
-      .stat-number {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: var(--text-main);
-      }
-
-      .stat-label {
-        font-size: 0.9rem;
-        color: var(--text-muted);
-      }
-
-      /* Hero Visual & Code Window */
-      .hero-visual {
-        position: relative;
-      }
-
-      .code-window {
-        background: rgba(15, 15, 20, 0.9);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 1.5rem;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-        position: relative;
-        z-index: 2;
-        transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
-        transition: transform 0.5s ease;
-      }
-
-      .code-window:hover {
-        transform: perspective(1000px) rotateY(0) rotateX(0);
-      }
-
-      .window-header {
-        display: flex;
-        gap: 8px;
-        margin-bottom: 1rem;
-      }
-
-      .window-header .dot {
-        width: 12px;
-        height: 12px;
+      .pf-footer-dot {
+        width: 6px;
+        height: 6px;
         border-radius: 50%;
+        background: #1d9e75;
+        display: inline-block;
+        margin-right: 6px;
+        animation: pulse 2s ease-in-out infinite;
       }
-
-      .dot.red {
-        background: #ff5f56;
-      }
-
-      .dot.yellow {
-        background: #ffbd2e;
-      }
-
-      .dot.green {
-        background: #27c93f;
-      }
-
-      .window-body pre {
-        font-family: var(--font-mono);
-        font-size: 0.9rem;
-        color: #e2e8f0;
-        overflow-x: auto;
-      }
-
-      .ai-orb {
-        position: absolute;
-        top: -50px;
-        right: -50px;
-        width: 200px;
-        height: 200px;
-        background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
-        filter: blur(40px);
-        opacity: 0.6;
-        z-index: 1;
-        animation: float 6s ease-in-out infinite;
-      }
-
-      @keyframes float {
+      @keyframes pulse {
         0%,
         100% {
-          transform: translateY(0);
+          opacity: 1;
+          transform: scale(1);
         }
-
         50% {
-          transform: translateY(-20px);
-        }
-      }
-
-      /* Features Section */
-      .section {
-        padding: 100px 0;
-      }
-
-      .section-title {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
-      }
-
-      .section-subtitle {
-        color: var(--text-muted);
-        margin-bottom: 4rem;
-      }
-
-      .features-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-      }
-
-      .feature-card {
-        background: var(--bg-card);
-        border: 1px solid var(--border);
-        padding: 2rem;
-        border-radius: 16px;
-        transition: all 0.3s ease;
-      }
-
-      .feature-card:hover {
-        background: var(--bg-card-hover);
-        transform: translateY(-5px);
-        border-color: var(--primary);
-      }
-
-      .icon-box {
-        font-size: 2.5rem;
-        margin-bottom: 1.5rem;
-      }
-
-      .feature-card h3 {
-        font-size: 1.25rem;
-        margin-bottom: 1rem;
-      }
-
-      .feature-card p {
-        color: var(--text-muted);
-        font-size: 0.95rem;
-      }
-
-      /* Curriculum Section */
-      .curriculum-wrapper {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 4rem;
-        align-items: center;
-      }
-
-      .curriculum-list {
-        list-style: none;
-        margin-top: 2rem;
-      }
-
-      .curriculum-item {
-        display: flex;
-        gap: 1.5rem;
-        padding: 1.5rem;
-        border-radius: 12px;
-        transition: all 0.3s;
-        border: 1px solid transparent;
-        cursor: pointer;
-      }
-
-      .curriculum-item:hover,
-      .curriculum-item.active {
-        background: var(--bg-card);
-        border-color: var(--border);
-      }
-
-      .curriculum-item .step {
-        font-family: var(--font-mono);
-        color: var(--primary);
-        font-weight: 700;
-        font-size: 1.2rem;
-      }
-
-      .curriculum-item h4 {
-        margin-bottom: 0.5rem;
-        font-size: 1.1rem;
-      }
-
-      .curriculum-item p {
-        color: var(--text-muted);
-        font-size: 0.9rem;
-      }
-
-      .visual-box {
-        width: 100%;
-        height: 400px;
-        background: linear-gradient(45deg, #1a1a2e, #16213e);
-        border-radius: 20px;
-        border: 1px solid var(--border);
-        position: relative;
-        overflow: hidden;
-      }
-
-      .visual-box::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: url("hero_background_1764634148809.png") center/cover
-          no-repeat;
-        opacity: 0.5;
-        mix-blend-mode: overlay;
-      }
-
-      /* CTA Section */
-      .cta-box {
-        background: linear-gradient(
-          135deg,
-          rgba(99, 102, 241, 0.1),
-          rgba(168, 85, 247, 0.1)
-        );
-        border: 1px solid var(--border);
-        border-radius: 24px;
-        padding: 4rem 2rem;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .cta-box h2 {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
-      }
-
-      .cta-box p {
-        color: var(--text-muted);
-        margin-bottom: 2rem;
-      }
-
-      .cta-form {
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-        max-width: 500px;
-        margin: 0 auto 1rem;
-      }
-
-      .cta-form input {
-        flex: 1;
-        padding: 0.8rem 1.5rem;
-        border-radius: 50px;
-        border: 1px solid var(--border);
-        background: rgba(255, 255, 255, 0.05);
-        color: white;
-        outline: none;
-      }
-
-      .cta-form input:focus {
-        border-color: var(--primary);
-      }
-
-      .note {
-        font-size: 0.8rem;
-        color: var(--text-muted);
-      }
-
-      /* Footer */
-      .footer {
-        border-top: 1px solid var(--border);
-        padding: 4rem 0 2rem;
-        background: #050508;
-      }
-
-      .footer-content {
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        gap: 4rem;
-        margin-bottom: 3rem;
-      }
-
-      .footer-brand p {
-        color: var(--text-muted);
-        margin-top: 1rem;
-      }
-
-      .footer-links {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
-      }
-
-      .link-group h4 {
-        margin-bottom: 1.5rem;
-        font-size: 0.9rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-      }
-
-      .link-group a {
-        display: block;
-        color: var(--text-muted);
-        text-decoration: none;
-        margin-bottom: 0.8rem;
-        transition: color 0.3s;
-      }
-
-      .link-group a:hover {
-        color: var(--text-main);
-      }
-
-      .footer-bottom {
-        text-align: center;
-        padding-top: 2rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
-        color: var(--text-muted);
-        font-size: 0.9rem;
-      }
-
-      /* Responsive */
-      @media (max-width: 768px) {
-        .header-container {
-          padding: 0 1.5rem;
-        }
-
-        .nav {
-          position: fixed;
-          top: 70px;
-          left: 0;
-          width: 100%;
-          background: var(--bg-dark);
-          padding: 2rem;
-          border-bottom: 1px solid var(--border);
-          transform: translateY(-150%);
-          transition: transform 0.3s ease;
-        }
-
-        .nav.active {
-          transform: translateY(0);
-        }
-
-        .nav ul {
-          flex-direction: column;
-          gap: 1.5rem;
-        }
-
-        .mobile-menu-btn {
-          display: flex;
-        }
-
-        .hero-container,
-        .curriculum-wrapper,
-        .footer-content {
-          grid-template-columns: 1fr;
-          gap: 3rem;
-        }
-
-        .hero {
-          padding-top: 120px;
-          text-align: center;
-        }
-
-        .hero-buttons {
-          justify-content: center;
-        }
-
-        .hero-stats {
-          justify-content: center;
-        }
-
-        .hero-title {
-          font-size: 2.5rem;
-        }
-
-        .hero-description {
-          margin: 0 auto 2.5rem;
-        }
-
-        .cta-form {
-          flex-direction: column;
-        }
-
-        .footer-links {
-          grid-template-columns: 1fr;
-          text-align: center;
+          opacity: 0.4;
+          transform: scale(0.8);
         }
       }
     </style>
   </head>
-
   <body>
-    <div class="background-glow"></div>
-
-    <header class="header">
-      <div class="container header-container">
-        <a href="#" class="logo"
-          >Portfolio by Takahiro Tanaka<span class="dot">.</span></a
-        >
-        <nav class="nav">
-          <ul>
-            <li><a href="#curriculum">サンプル実装</a></li>
-          </ul>
-        </nav>
-        <button class="mobile-menu-btn" aria-label="メニューを開く">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+    <div class="pf-root">
+      <div class="pf-header">
+        <div class="pf-prompt-line">
+          <span class="pf-prompt-sym">~/portfolio</span>
+          <span class="pf-prompt-sym" style="color: #aaa">$</span>
+          <span class="pf-prompt-text"
+            >whoami<span class="pf-cursor"></span
+          ></span>
+        </div>
+        <div class="pf-name">Takahiro <span class="accent">Tanaka</span></div>
+        <div class="pf-role">
+          <span class="dim">// </span>Full-Stack Engineer &nbsp;<span
+            class="dim"
+            >|</span
+          >&nbsp; TypeScript / React / Node.js / C#
+        </div>
       </div>
-    </header>
 
-    <main>
-      <section id="curriculum" class="curriculum section">
-        <div class="container">
-          <div class="curriculum-wrapper">
-            <div class="curriculum-content">
-              <h2 class="section-title">サンプル実装</h2>
-              <ul class="curriculum-list">
-                <!-- Curriculum items will be generated by JavaScript -->
-              </ul>
-            </div>
-            <div class="curriculum-visual">
-              <div class="visual-box">
-                <iframe
-                  id="curriculum-iframe"
-                  src=""
-                  frameborder="0"
-                  style="
-                    width: 200%;
-                    height: 200%;
-                    transform: scale(0.5);
-                    transform-origin: 0 0;
-                    border: none;
-                  "
-                ></iframe>
+      <div class="pf-section-label">implementations</div>
+
+      <div class="pf-cards">
+        <div class="pf-card">
+          <div class="pf-card-header">
+            <div class="pf-card-num">01</div>
+            <div class="pf-card-title">UI Layout Editor</div>
+            <div class="pf-card-tag-row">
+              <div class="pf-card-tags">
+                <span class="pf-card-tag">React</span>
+                <span class="pf-card-tag">DnD</span>
               </div>
-              <div style="text-align: center; margin-top: 1rem">
-                <button id="open-iframe" class="btn btn-primary">Open</button>
-              </div>
+              <button
+                class="open-link"
+                onclick="
+                  window.open(
+                    'https://lab3230.github.io/i/site/UI-LayoutEditor/index.html',
+                    '_blank',
+                  )
+                "
+                aria-label="UI Layout Editor を開く"
+              >
+                <i
+                  class="ti ti-external-link"
+                  style="font-size: 12px"
+                  aria-hidden="true"
+                ></i>
+                Open
+              </button>
             </div>
           </div>
+          <div class="pf-preview-wrap">
+            <iframe
+              class="pf-preview"
+              id="if1"
+              src="https://lab3230.github.io/i/site/UI-LayoutEditor/index.html"
+              sandbox="allow-scripts allow-same-origin"
+              loading="lazy"
+              title="UI Layout Editor preview"
+            ></iframe>
+          </div>
+          <div class="pf-fallback" id="fb1">
+            <span class="pf-fallback-txt">preview blocked by browser</span>
+            <button
+              class="pf-fallback-btn"
+              onclick="
+                window.open(
+                  'https://lab3230.github.io/i/site/UI-LayoutEditor/index.html',
+                  '_blank',
+                )
+              "
+            >
+              <i
+                class="ti ti-external-link"
+                style="font-size: 12px"
+                aria-hidden="true"
+              ></i>
+              Open
+            </button>
+          </div>
         </div>
-      </section>
-    </main>
+
+        <div class="pf-card">
+          <div class="pf-card-header">
+            <div class="pf-card-num">02</div>
+            <div class="pf-card-title">UI Grid Layout</div>
+            <div class="pf-card-tag-row">
+              <div class="pf-card-tags">
+                <span class="pf-card-tag">CSS Grid</span>
+                <span class="pf-card-tag">TS</span>
+              </div>
+              <button
+                class="open-link"
+                onclick="
+                  window.open(
+                    'https://lab3230.github.io/i/site/UI-GridLayout/index.html',
+                    '_blank',
+                  )
+                "
+                aria-label="UI Grid Layout を開く"
+              >
+                <i
+                  class="ti ti-external-link"
+                  style="font-size: 12px"
+                  aria-hidden="true"
+                ></i>
+                Open
+              </button>
+            </div>
+          </div>
+          <div class="pf-preview-wrap">
+            <iframe
+              class="pf-preview"
+              id="if2"
+              src="https://lab3230.github.io/i/site/UI-GridLayout/index.html"
+              sandbox="allow-scripts allow-same-origin"
+              loading="lazy"
+              title="UI Grid Layout preview"
+            ></iframe>
+          </div>
+          <div class="pf-fallback" id="fb2">
+            <span class="pf-fallback-txt">preview blocked by browser</span>
+            <button
+              class="pf-fallback-btn"
+              onclick="
+                window.open(
+                  'https://lab3230.github.io/i/site/UI-GridLayout/index.html',
+                  '_blank',
+                )
+              "
+            >
+              <i
+                class="ti ti-external-link"
+                style="font-size: 12px"
+                aria-hidden="true"
+              ></i>
+              Open
+            </button>
+          </div>
+        </div>
+
+        <div class="pf-card">
+          <div class="pf-card-header">
+            <div class="pf-card-num">03</div>
+            <div class="pf-card-title">UI Hand Writing</div>
+            <div class="pf-card-tag-row">
+              <div class="pf-card-tags">
+                <span class="pf-card-tag">Canvas</span>
+                <span class="pf-card-tag">Pointer</span>
+              </div>
+              <button
+                class="open-link"
+                onclick="
+                  window.open(
+                    'https://lab3230.github.io/i/site/UI-HandWriting/index.html',
+                    '_blank',
+                  )
+                "
+                aria-label="UI Hand Writing を開く"
+              >
+                <i
+                  class="ti ti-external-link"
+                  style="font-size: 12px"
+                  aria-hidden="true"
+                ></i>
+                Open
+              </button>
+            </div>
+          </div>
+          <div class="pf-preview-wrap">
+            <iframe
+              class="pf-preview"
+              id="if3"
+              src="https://lab3230.github.io/i/site/UI-HandWriting/index.html"
+              sandbox="allow-scripts allow-same-origin"
+              loading="lazy"
+              title="UI HandWriting preview"
+            ></iframe>
+          </div>
+          <div class="pf-fallback" id="fb3">
+            <span class="pf-fallback-txt">preview blocked by browser</span>
+            <button
+              class="pf-fallback-btn"
+              onclick="
+                window.open(
+                  'https://lab3230.github.io/i/site/UI-HandWriting/index.html',
+                  '_blank',
+                )
+              "
+            >
+              <i
+                class="ti ti-external-link"
+                style="font-size: 12px"
+                aria-hidden="true"
+              ></i>
+              Open
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pf-footer">
+        <span
+          ><span class="pf-footer-dot"></span>available for SES contracts</span
+        >
+        <span>Vite · React · TypeScript</span>
+      </div>
+    </div>
 
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        // Mobile Menu Toggle
-        const mobileBtn = document.querySelector(".mobile-menu-btn");
-        const nav = document.querySelector(".nav");
-
-        mobileBtn.addEventListener("click", () => {
-          nav.classList.toggle("active");
-          // Animate hamburger icon
-          const spans = mobileBtn.querySelectorAll("span");
-          if (nav.classList.contains("active")) {
-            spans[0].style.transform = "rotate(45deg) translate(5px, 5px)";
-            spans[1].style.opacity = "0";
-            spans[2].style.transform = "rotate(-45deg) translate(5px, -5px)";
-          } else {
-            spans[0].style.transform = "none";
-            spans[1].style.opacity = "1";
-            spans[2].style.transform = "none";
-          }
+      [1, 2, 3].forEach(function (n) {
+        var iframe = document.getElementById("if" + n);
+        var fallback = document.getElementById("fb" + n);
+        if (!iframe) return;
+        var timer = setTimeout(function () {
+          iframe.style.display = "none";
+          fallback.style.display = "flex";
+        }, 5000);
+        iframe.addEventListener("load", function () {
+          clearTimeout(timer);
+          iframe.style.display = "block";
+          fallback.style.display = "none";
         });
-
-        // Smooth Scroll for Anchor Links
-        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-          anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            nav.classList.remove("active"); // Close mobile menu on click
-
-            // Reset hamburger icon
-            const spans = mobileBtn.querySelectorAll("span");
-            spans[0].style.transform = "none";
-            spans[1].style.opacity = "1";
-            spans[2].style.transform = "none";
-
-            document.querySelector(this.getAttribute("href")).scrollIntoView({
-              behavior: "smooth",
-            });
-          });
+        iframe.addEventListener("error", function () {
+          clearTimeout(timer);
+          iframe.style.display = "none";
+          fallback.style.display = "flex";
         });
-
-        // Intersection Observer for Fade-in Animations
-        const observerOptions = {
-          threshold: 0.1,
-          rootMargin: "0px 0px -50px 0px",
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
-              observer.unobserve(entry.target);
-            }
-          });
-        }, observerOptions);
-
-        // Add fade-in class to elements we want to animate
-        const animatedElements = document.querySelectorAll(
-          ".feature-card, .curriculum-item, .hero-content, .hero-visual, .section-title",
-        );
-        animatedElements.forEach((el) => {
-          el.style.opacity = "0";
-          el.style.transform = "translateY(20px)";
-          el.style.transition =
-            "opacity 0.6s ease-out, transform 0.6s ease-out";
-          observer.observe(el);
-        });
-
-        // CSS class for visible state
-        const style = document.createElement("style");
-        style.innerHTML = `
-                .visible {
-                    opacity: 1 !important;
-                    transform: translateY(0) !important;
-                }
-            `;
-        document.head.appendChild(style);
-
-        // Typing Effect for Code Block
-        const codeBlock = document.querySelector("code.language-python");
-        if (codeBlock) {
-          const originalText = codeBlock.textContent;
-          codeBlock.textContent = "";
-          let i = 0;
-
-          function typeWriter() {
-            if (i < originalText.length) {
-              codeBlock.textContent += originalText.charAt(i);
-              i++;
-              setTimeout(typeWriter, 20); // Typing speed
-            }
-          }
-
-          // Start typing when hero section is visible
-          const heroObserver = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
-              typeWriter();
-            }
-          });
-        }
-        // Curriculum Data
-        const curriculumData = [
-          {
-            step: "01",
-            title: "ビジュアルエディター",
-            description: "オリジナルのビジュアルエディターのサンプル実装です。",
-            url: "site/UI-LayoutEditor/index.html",
-          },
-          {
-            step: "02",
-            title: "グリッドレイアウトコントロール",
-            description:
-              "オリジナルのグリッドレイアウトコントロールのサンプル実装です。",
-            url: "site/UI-GridLayout/index.html",
-          },
-          {
-            step: "03",
-            title: "手書き入力コントロール",
-            description: "手書き入力インターフェースのサンプル実装です。",
-            url: "site/UI-HandWriting/index.html",
-          },
-          {
-            step: "04",
-            title: "Coming Soon...",
-            description:
-              "現在準備中のコンテンツです。公開までしばらくお待ちください。",
-            url: "under_construction.html",
-          },
-        ];
-
-        const curriculumList = document.querySelector(".curriculum-list");
-        const iframe = document.getElementById("curriculum-iframe");
-        const openBtn = document.getElementById("open-iframe");
-
-        if (curriculumList && iframe) {
-          // Clear existing content
-          curriculumList.innerHTML = "";
-
-          curriculumData.forEach((item, index) => {
-            const li = document.createElement("li");
-            li.className = `curriculum-item ${index === 0 ? "active" : ""}`;
-            li.innerHTML = `
-                <span class="step">${item.step}</span>
-                <div class="content">
-                    <h4>${item.title}</h4>
-                    <p>${item.description}</p>
-                </div>
-            `;
-
-            li.addEventListener("click", () => {
-              // Remove active class from all items
-              document
-                .querySelectorAll(".curriculum-item")
-                .forEach((i) => i.classList.remove("active"));
-              // Add active class to clicked item
-              li.classList.add("active");
-
-              // Update iframe src
-              iframe.src = item.url;
-            });
-
-            curriculumList.appendChild(li);
-          });
-
-          // Set initial iframe src
-          if (curriculumData.length > 0) {
-            iframe.src = curriculumData[0].url;
-          }
-        }
-
-        if (openBtn && iframe) {
-          openBtn.addEventListener("click", () => {
-            if (iframe.src) {
-              window.open(iframe.src, "_blank");
-            }
-          });
-        }
       });
     </script>
   </body>
