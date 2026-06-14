@@ -23,38 +23,55 @@
         padding: 0;
       }
 
+      :root {
+        --accent: #5fe0d0;
+        --bg-gradient:
+          linear-gradient(100deg, rgba(127, 86, 45, 0.32), transparent 32%),
+          linear-gradient(145deg, #11100e 0%, #17191a 52%, #071614 100%);
+        --pattern:
+          repeating-linear-gradient(
+            135deg,
+            rgba(255, 179, 102, 0.075) 0 1px,
+            transparent 1px 22px
+          ),
+          repeating-linear-gradient(
+            45deg,
+            rgba(95, 224, 208, 0.06) 0 1px,
+            transparent 1px 34px
+          );
+        --text: #f7f1e9;
+        --muted: #b2aaa0;
+        --quiet: #827b73;
+        --surface: rgba(22, 21, 19, 0.78);
+        --line: rgba(255, 220, 172, 0.16);
+      }
+
       body {
         font-family: "Inter", sans-serif;
-        background: #ffffff;
-        color: #1a1a1a;
+        background: var(--bg-gradient);
+        background-attachment: fixed;
+        color: var(--text);
         min-height: 100vh;
         display: flex;
         justify-content: center;
         padding: 0 24px;
+        position: relative;
+        -webkit-font-smoothing: antialiased;
       }
 
-      .background-glow {
+      /* パターンレイヤー */
+      body::before {
+        content: "";
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background:
-          radial-gradient(
-            circle at 15% 50%,
-            rgba(99, 102, 241, 0.15) 0%,
-            transparent 25%
-          ),
-          radial-gradient(
-            circle at 85% 30%,
-            rgba(168, 85, 247, 0.15) 0%,
-            transparent 25%
-          );
-        z-index: -1;
+        inset: 0;
+        background: var(--pattern);
         pointer-events: none;
+        z-index: 0;
       }
 
       .pf-root {
+        position: relative;
+        z-index: 1;
         width: 100%;
         max-width: 680px;
         padding: 0 0 4rem;
@@ -62,7 +79,7 @@
 
       /* Header */
       .pf-header {
-        border-bottom: 0.5px solid rgba(0, 0, 0, 0.15);
+        border-bottom: 1px solid var(--line);
         padding: 3rem 0 2rem;
         margin-bottom: 2.5rem;
       }
@@ -75,19 +92,19 @@
       .pf-prompt-sym {
         font-family: "JetBrains Mono", monospace;
         font-size: 13px;
-        color: #1d9e75;
+        color: var(--accent);
         user-select: none;
       }
       .pf-prompt-text {
         font-family: "JetBrains Mono", monospace;
         font-size: 13px;
-        color: #666;
+        color: var(--muted);
       }
       .pf-cursor {
         display: inline-block;
         width: 8px;
         height: 14px;
-        background: #1d9e75;
+        background: var(--accent);
         vertical-align: middle;
         margin-left: 2px;
         animation: blink 1.1s step-end infinite;
@@ -106,21 +123,21 @@
         font-size: 32px;
         font-weight: 700;
         letter-spacing: -0.5px;
-        color: #1a1a1a;
+        color: var(--text);
         line-height: 1.2;
         margin-bottom: 6px;
       }
       .pf-name .accent {
-        color: #1d9e75;
+        color: var(--accent);
       }
       .pf-role {
         font-family: "JetBrains Mono", monospace;
         font-size: 14px;
-        color: #666;
+        color: var(--muted);
         letter-spacing: 0.04em;
       }
       .pf-role .dim {
-        color: #aaa;
+        color: var(--quiet);
       }
 
       /* Section label */
@@ -128,7 +145,7 @@
         font-family: "JetBrains Mono", monospace;
         font-size: 11px;
         letter-spacing: 0.12em;
-        color: #aaa;
+        color: var(--quiet);
         text-transform: uppercase;
         margin-bottom: 1rem;
         display: flex;
@@ -138,8 +155,8 @@
       .pf-section-label::after {
         content: "";
         flex: 1;
-        height: 0.5px;
-        background: rgba(0, 0, 0, 0.15);
+        height: 1px;
+        background: var(--line);
       }
 
       /* Cards */
@@ -150,15 +167,18 @@
         margin-bottom: 2.5rem;
       }
       .pf-card {
-        background: #ffffff;
-        border: 0.5px solid rgba(0, 0, 0, 0.15);
+        background: var(--surface);
+        backdrop-filter: blur(8px);
+        border: 1px solid var(--line);
         border-radius: 12px;
         overflow: hidden;
-        transition: border-color 0.15s;
+        transition: all 0.2s ease;
         position: relative;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
       }
       .pf-card:hover {
-        border-color: rgba(0, 0, 0, 0.3);
+        border-color: var(--accent);
+        transform: translateY(-2px);
       }
       .pf-card::before {
         content: "";
@@ -167,7 +187,7 @@
         left: 0;
         width: 3px;
         height: 100%;
-        background: #1d9e75;
+        background: var(--accent);
         opacity: 0;
         transition: opacity 0.15s;
         z-index: 1;
@@ -181,7 +201,7 @@
       .pf-card-num {
         font-family: "JetBrains Mono", monospace;
         font-size: 11px;
-        color: #1d9e75;
+        color: var(--accent);
         margin-bottom: 8px;
         display: flex;
         align-items: center;
@@ -190,14 +210,14 @@
       .pf-card-num::before {
         content: "";
         width: 16px;
-        height: 0.5px;
-        background: #1d9e75;
+        height: 1px;
+        background: var(--accent);
       }
       .pf-card-title {
         font-family: "JetBrains Mono", monospace;
         font-size: 14px;
         font-weight: 500;
-        color: #1a1a1a;
+        color: var(--text);
         margin-bottom: 10px;
       }
       .pf-card-tag-row {
@@ -216,10 +236,10 @@
         font-family: "JetBrains Mono", monospace;
         font-size: 10px;
         padding: 2px 7px;
-        border-radius: 3px;
-        background: #f5f5f5;
-        color: #888;
-        border: 0.5px solid rgba(0, 0, 0, 0.15);
+        border-radius: 4px;
+        background: rgba(95, 224, 208, 0.08);
+        color: #a7eee6;
+        border: 1px solid rgba(95, 224, 208, 0.2);
       }
       .open-link {
         display: inline-flex;
@@ -227,7 +247,7 @@
         gap: 5px;
         font-family: "JetBrains Mono", monospace;
         font-size: 11px;
-        color: #1d9e75;
+        color: var(--accent);
         background: none;
         border: none;
         padding: 0;
@@ -244,8 +264,8 @@
         width: 100%;
         height: 250px;
         overflow: hidden;
-        border-top: 0.5px solid rgba(0, 0, 0, 0.15);
-        background: #f9f9f9;
+        border-top: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.2);
         position: relative;
       }
       .pf-preview {
@@ -256,22 +276,23 @@
         transform: scale(0.5);
         transform-origin: top left;
         pointer-events: none;
+        opacity: 0.85;
       }
       .pf-fallback {
         width: 100%;
         height: 250px;
-        border-top: 0.5px solid rgba(0, 0, 0, 0.15);
+        border-top: 1px solid var(--line);
         display: none;
         align-items: center;
         justify-content: center;
         flex-direction: column;
         gap: 10px;
-        background: #f9f9f9;
+        background: rgba(0, 0, 0, 0.2);
       }
       .pf-fallback-txt {
         font-family: "JetBrains Mono", monospace;
         font-size: 11px;
-        color: #aaa;
+        color: var(--quiet);
       }
       .pf-fallback-btn {
         display: inline-flex;
@@ -279,7 +300,7 @@
         gap: 5px;
         font-family: "JetBrains Mono", monospace;
         font-size: 11px;
-        color: #1d9e75;
+        color: var(--accent);
         background: none;
         border: none;
         padding: 0;
@@ -290,9 +311,9 @@
       .pf-footer {
         font-family: "JetBrains Mono", monospace;
         font-size: 11px;
-        color: #aaa;
+        color: var(--quiet);
         padding-top: 1.5rem;
-        border-top: 0.5px solid rgba(0, 0, 0, 0.15);
+        border-top: 1px solid var(--line);
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -301,9 +322,10 @@
         width: 6px;
         height: 6px;
         border-radius: 50%;
-        background: #1d9e75;
+        background: var(--accent);
         display: inline-block;
         margin-right: 6px;
+        box-shadow: 0 0 10px var(--accent);
         animation: pulse 2s ease-in-out infinite;
       }
       @keyframes pulse {
@@ -313,19 +335,24 @@
           transform: scale(1);
         }
         50% {
-          opacity: 0.4;
+          opacity: 0.5;
           transform: scale(0.8);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .pf-cards {
+          grid-template-columns: 1fr;
         }
       }
     </style>
   </head>
   <body>
-    <!-- <dev class="background-glow" /> -->
     <div class="pf-root">
-      <div class="pf-header">
+      <header class="pf-header">
         <div class="pf-prompt-line">
           <span class="pf-prompt-sym">~/portfolio</span>
-          <span class="pf-prompt-sym" style="color: #aaa">$</span>
+          <span class="pf-prompt-sym" style="color: var(--quiet)">$</span>
           <span class="pf-prompt-text"
             >whoami<span class="pf-cursor"></span
           ></span>
@@ -337,7 +364,7 @@
             >|</span
           >&nbsp; TypeScript / React / Node.js / C#
         </div>
-      </div>
+      </header>
 
       <div class="pf-section-label">implementations</div>
 
@@ -520,12 +547,12 @@
         </div>
       </div>
 
-      <div class="pf-footer">
+      <footer class="pf-footer">
         <span
           ><span class="pf-footer-dot"></span>available for SES contracts</span
         >
-        <span>Vite · React · TypeScript</span>
-      </div>
+        <span>TypeScript · React · Vite · Node.js · C#</span>
+      </footer>
     </div>
 
     <script>
